@@ -16,8 +16,7 @@ class App extends Component {
 
   handleChange = e => {
     const { name, value } = e.target;
-    // console.log('name:', name);
-    // console.log('value:', value);
+
     this.setState({ [name]: value });
   };
   handleAddContactClick = e => {
@@ -48,8 +47,9 @@ class App extends Component {
   };
 
   render() {
+    const filterNormalize = this.state.filter.toLowerCase();
     const visibleContacst = this.state.contacts.filter(contact =>
-      contact.name.includes(this.state.filter)
+      contact.name.toLowerCase().includes(filterNormalize)
     );
     return (
       <>
