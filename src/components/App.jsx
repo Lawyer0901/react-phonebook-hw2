@@ -38,8 +38,19 @@ class App extends Component {
     });
     this.setState({ name: '', number: '' });
   };
+  handleFilterContact = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+  handleDelete = id => {
+    this.setState({
+      contacts: this.state.contacts.filter(contatc => contatc.id !== id),
+    });
+  };
 
   render() {
+    const visibleContacst = this.state.contacts.filter(contact =>
+      contact.name.includes(this.state.filter)
+    );
     return (
       <>
         <h1>PHONEBOOK</h1>
@@ -77,15 +88,22 @@ class App extends Component {
         <form>
           <label>
             Finde contact by name
-            <input name={this.state.filter} type="text" />
+            <input
+              onChange={this.handleFilterContact}
+              name="filter"
+              type="text"
+              value={this.state.filter}
+            />
           </label>
         </form>
         <ul>
-          {this.state.contacts.map(contact => {
+          {visibleContacst.map(contact => {
             return (
               <li key={contact.id}>
                 <span>{contact.name}</span> <span>{contact.number}</span>
-                <button>Delete</button>
+                <button onClick={() => this.handleDelete(contact.id)}>
+                  Delete
+                </button>
               </li>
             );
           })}
