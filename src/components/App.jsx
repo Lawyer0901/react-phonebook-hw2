@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { nanoid } from 'nanoid';
 
 class App extends Component {
   state = {
@@ -13,19 +14,37 @@ class App extends Component {
     number: '',
   };
 
-  handleChange(e) {
+  handleChange = e => {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
-    // this.setState({ [name]: value });
-  }
+    // console.log('name:', name);
+    // console.log('value:', value);
+    this.setState({ [name]: value });
+  };
+  handleAddContactClick = e => {
+    e.preventDefault();
+    console.log(this.state);
+    const obj = {
+      id: nanoid(),
+      name: this.state.name,
+      number: this.state.number,
+    };
+    console.log(obj);
+    this.setState(prevState => {
+      console.log(prevState.name);
+      // if (prevState.name === obj.name) {
+      //   return alert('Already exist contact');
+      // } else
+      return { contacts: [...prevState.contacts, obj] };
+    });
+    this.setState({ name: '', number: '' });
+  };
 
   render() {
     return (
       <>
         <h1>PHONEBOOK</h1>
 
-        <form>
+        <form onSubmit={this.handleAddContactClick}>
           <label>
             Name
             <input
@@ -51,7 +70,7 @@ class App extends Component {
               onChange={this.handleChange}
             />
           </label>
-          <button type="button">Add Contact</button>
+          <button type="sunmit">Add Contact</button>
         </form>
 
         <h2>CONTACTS</h2>
