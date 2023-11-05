@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import ContactForm from './ContactForm/ContactForm';
 
 class App extends Component {
   state = {
@@ -10,37 +11,26 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
-
-    this.setState({ [name]: value });
-  };
-  handleAddContactClick = e => {
-    e.preventDefault();
-    // console.log(this.state);
-    const obj = {
+  handleAddContactClick = obj => {
+    const newObj = {
       id: nanoid(),
-      name: this.state.name,
-      number: this.state.number,
+      ...obj,
     };
-    // console.log(obj);
+    console.log(obj);
+    console.log(newObj);
+
     const existContact = this.state.contacts.find(contact =>
-      contact.name.toLowerCase().includes(obj.name.toLowerCase())
+      contact.name.toLowerCase().includes(newObj.name.toLowerCase())
     );
 
     this.setState(prevState => {
-      // console.log(prevState.name);
       if (existContact) {
-        return alert(`Contact ${obj.name} already exist`);
+        return alert(`Contact ${newObj.name} already exist`);
       }
-      return { contacts: [...prevState.contacts, obj] };
+      return { contacts: [...prevState.contacts, newObj] };
     });
-
-    this.setState({ name: '', number: '' });
   };
   handleFilterContact = e => {
     this.setState({ filter: e.currentTarget.value });
@@ -59,35 +49,7 @@ class App extends Component {
     return (
       <>
         <h1>PHONEBOOK</h1>
-
-        <form onSubmit={this.handleAddContactClick}>
-          <label>
-            Name
-            <input
-              type="text"
-              value={this.state.name}
-              name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-              onChange={this.handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Number
-            <input
-              type="tel"
-              value={this.state.number}
-              name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-              onChange={this.handleChange}
-            />
-          </label>
-          <button type="sunmit">Add Contact</button>
-        </form>
+        <ContactForm handleAddContact={this.handleAddContactClick} />
 
         <h2>CONTACTS</h2>
         <form>
