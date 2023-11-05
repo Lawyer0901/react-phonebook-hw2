@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList';
 
 class App extends Component {
   state = {
@@ -63,18 +64,10 @@ class App extends Component {
             />
           </label>
         </form>
-        <ul>
-          {visibleContacst.map(contact => {
-            return (
-              <li key={contact.id}>
-                <span>{contact.name}</span> <span>{contact.number}</span>
-                <button onClick={() => this.handleDelete(contact.id)}>
-                  Delete
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        <ContactList
+          handleDelete={this.handleDelete}
+          visibleContacst={visibleContacst}
+        />
       </>
     );
   }
