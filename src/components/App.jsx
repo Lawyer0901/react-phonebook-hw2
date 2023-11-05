@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
-
+import Filter from './Filter/Filter';
 class App extends Component {
   state = {
     contacts: [
@@ -53,7 +53,12 @@ class App extends Component {
         <ContactForm handleAddContact={this.handleAddContactClick} />
 
         <h2>CONTACTS</h2>
-        <form>
+        <Filter
+          handleFilterContact={this.handleFilterContact}
+          name="filter"
+          value={this.state.filter}
+        />
+        {/* <form>
           <label>
             Finde contact by name
             <input
@@ -63,7 +68,7 @@ class App extends Component {
               value={this.state.filter}
             />
           </label>
-        </form>
+        </form> */}
         <ContactList
           handleDelete={this.handleDelete}
           visibleContacst={visibleContacst}
