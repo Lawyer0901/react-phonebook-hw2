@@ -21,20 +21,25 @@ class App extends Component {
   };
   handleAddContactClick = e => {
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
     const obj = {
       id: nanoid(),
       name: this.state.name,
       number: this.state.number,
     };
-    console.log(obj);
+    // console.log(obj);
+    const existContact = this.state.contacts.find(contact =>
+      contact.name.toLowerCase().includes(obj.name.toLowerCase())
+    );
+
     this.setState(prevState => {
-      console.log(prevState.name);
-      // if (prevState.name === obj.name) {
-      //   return alert('Already exist contact');
-      // } else
+      // console.log(prevState.name);
+      if (existContact) {
+        return alert(`Contact ${obj.name} already exist`);
+      }
       return { contacts: [...prevState.contacts, obj] };
     });
+
     this.setState({ name: '', number: '' });
   };
   handleFilterContact = e => {
