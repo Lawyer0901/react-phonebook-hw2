@@ -3,6 +3,9 @@ import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
+import { Container } from './Container.styled';
+import { Title, Contacts } from './Title.styled';
+
 class App extends Component {
   state = {
     contacts: [
@@ -48,32 +51,21 @@ class App extends Component {
       contact.name.toLowerCase().includes(filterNormalize)
     );
     return (
-      <>
-        <h1>PHONEBOOK</h1>
+      <Container>
+        <Title>PHONEBOOK</Title>
         <ContactForm handleAddContact={this.handleAddContactClick} />
 
-        <h2>CONTACTS</h2>
+        <Contacts>CONTACTS</Contacts>
         <Filter
           handleFilterContact={this.handleFilterContact}
           name="filter"
           value={this.state.filter}
         />
-        {/* <form>
-          <label>
-            Finde contact by name
-            <input
-              onChange={this.handleFilterContact}
-              name="filter"
-              type="text"
-              value={this.state.filter}
-            />
-          </label>
-        </form> */}
         <ContactList
           handleDelete={this.handleDelete}
           visibleContacst={visibleContacst}
         />
-      </>
+      </Container>
     );
   }
 }

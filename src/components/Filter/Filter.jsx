@@ -1,16 +1,19 @@
+import { Form, Label, Input } from './Filter.styled';
+
 const Filter = ({ handleFilterContact, name, value }) => {
   return (
-    <form>
-      <label>
+    <Form>
+      <Label>
         Finde contact by name
-        <input
+        <Input
           onChange={handleFilterContact}
           name={name}
           type="text"
           value={value}
+          placeholder="Finde contact by name"
         />
-      </label>
-    </form>
+      </Label>
+    </Form>
   );
 };
 
