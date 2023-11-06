@@ -7,15 +7,33 @@ export const List = styled.ul`
   justify-content: center;
   align-items: center;
   padding: 0;
+  font-family: 'Marck Script', cursive;
 `;
 
 export const Items = styled.li`
   width: 85%;
   display: flex;
+  justify-content: space-between;
   padding: 5px;
-  gap: 30px;
-  font-size: 20px;
-  font-weight: 500;
+
+  border-bottom: 2px #404b51 dotted;
+  font-size: 15px;
+  line-height: 1;
+
+  span:nth-child(odd) {
+    padding-right: 3px;
+    color: #032a3f;
+  }
+  span:nth-child(even) {
+    float: right;
+    padding-left: 3px;
+    color: #b70dc7;
+  }
+  span {
+    /* background: white; */
+    position: relative;
+    bottom: -7px;
+  }
 `;
 
 export const Button = styled.button`
@@ -27,7 +45,7 @@ export const Button = styled.button`
   color: white;
   font-size: 0.75rem;
   text-transform: uppercase;
-  width: 65%;
+  width: 40%;
 
   letter-spacing: 0.15em;
   transition: ease-in 1000ms;

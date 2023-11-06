@@ -13,6 +13,7 @@ export const Form = styled.form`
 `;
 export const Button = styled.button`
   border: none;
+  border-radius: 10px;
   padding: 0.85rem 1rem;
   margin-top: 2rem;
   background-color: #0e39fe;
